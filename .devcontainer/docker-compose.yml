@@ -1,0 +1,17 @@
+version: '3'
+services:
+  whisper:
+    privileged: true
+    build: ../.devcontainer/
+    devices:
+      - /dev/snd
+    environment:
+      PULSE_SERVER: host.docker.internal
+    volumes:
+      - ../:/workspaces/whisper:delegated
+      - ~/.config/pulse:/root/.config/pulse:ro
+      - cache-volume:/root/.cache
+    entrypoint: /bin/bash
+    tty: true
+volumes:
+  cache-volume:
